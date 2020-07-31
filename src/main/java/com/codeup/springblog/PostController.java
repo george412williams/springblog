@@ -25,11 +25,11 @@ public class PostController {
         return "view the form for creating a post";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-    @ResponseBody
-    public String postBlog() {
-        return "create a new post";
-    }
+//    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
+//    @ResponseBody
+//    public String postBlog() {
+//        return "create a new post";
+//    }
 
     @PostMapping("/posts/create")
     @ResponseBody
