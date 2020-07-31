@@ -9,19 +9,19 @@ public class PostController {
 
     @GetMapping("/posts")
     @ResponseBody
-    public String posts() {
+    public String index() {
         return "posts index page";
     }
 
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String postId(@PathVariable long id) {
-        return "view an individual post" + id;
+    public String show(@PathVariable long id) {
+        return "view an individual post: " + id;
     }
 
     @GetMapping("/posts/create")
     @ResponseBody
-    public String postCreate() {
+    public String create() {
         return "view the form for creating a post";
     }
 
@@ -29,5 +29,11 @@ public class PostController {
     @ResponseBody
     public String postBlog() {
         return "create a new post";
+    }
+
+    @PostMapping("/posts/create")
+    @ResponseBody
+    public String insert(){
+        return "post has been created";
     }
 }
