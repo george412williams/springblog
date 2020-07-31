@@ -20,6 +20,9 @@ public class LoginController {
     public String viewLoginInfo(@RequestParam(name = "username") String username, @RequestParam(name="password") String password, Model model) {
         ArrayList<String> ads = new ArrayList<String>();
         //db stuff in the next lesson, making a fake list to add to
+        boolean isLoggedIn = true;
+        //for loginsecurity
+
         ads.add("Ad 1");
         ads.add("Ad 2");
         ads.add("Ad 3");
@@ -28,6 +31,7 @@ public class LoginController {
         model.addAttribute("password", password);
         model.addAttribute("ads", ads);
             //got ads list and sending over
+        model.addAttribute("isLoggedIn", isLoggedIn);
 
 
         return "profile";
