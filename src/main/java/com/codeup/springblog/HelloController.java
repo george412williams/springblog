@@ -1,6 +1,7 @@
 package com.codeup.springblog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -42,4 +43,13 @@ public class HelloController {
     public String sayHello(@PathVariable String name){
         return "Hello " + name + ". " + name + "! Duck!";
     }
+
+    @GetMapping("/play-pen/{callsign}")
+    public String play(@PathVariable String callsign, Model model) {
+        model.addAttribute("callsign", callsign);
+        return "play-pen";
+    }
+
+
+
 }
