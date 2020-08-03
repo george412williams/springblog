@@ -10,16 +10,21 @@ import java.util.ArrayList;
 public class PostController {
 
     @GetMapping("/posts")
-//    @ResponseBody
+    @ResponseBody
     public String index() {
-        ArrayList<String> all = new ArrayList<>();
-        return "posts index page";
+        ArrayList<String> allPosts = new ArrayList<String>();
+        allPosts.add(1, "bodyone");
+        allPosts.add(2, "bodytwo");
+        return "posts index page" + allPosts;
     }
 
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String show(@PathVariable long id) {
-        return "view an individual post: " + id;
+    public String show(
+            @PathVariable long id,
+            @PathVariable String title,
+            @PathVariable String body) {
+        return "view an individual post: " + id + title + body;
     }
 
     @GetMapping("/posts/create")
