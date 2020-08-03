@@ -51,6 +51,9 @@ public class DiceController {
         return "roll-results";
     }
 
+    @GetMapping("/roll-two-results")
+    public String randTwoDiceRoll() { return "roll-results";}
+
     @GetMapping("/roll-two-results/{guess}")
     public String viewDiceResults(@PathVariable int guess, Model model){
         int diceRoll = (int) (Math.random() * 12) + 1;
