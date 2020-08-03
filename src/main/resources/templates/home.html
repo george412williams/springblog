@@ -6,7 +6,10 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>This is the real landing page!</h1>
+    <div>
+        <span th:include="partials/navbar :: navbar"></span>
+    </div>
+    <h1>Home landing page!</h1>
             <!--   placeholder after span -->
     <h2>Welcome <span th:text="${cohort}"></span></h2>
 
@@ -15,7 +18,10 @@
         <button type="submit">Submit</button>
     </form>
 
-
+    <h3> <a href="/roll-dice">Roll Dice Guess</a></h3>
+<div>
+    <span th:include="partials/footer :: footer"></span>
+</div>
 
 
 </body>

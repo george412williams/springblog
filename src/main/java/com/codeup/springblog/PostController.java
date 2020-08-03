@@ -4,12 +4,15 @@ package com.codeup.springblog;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
+//    @ResponseBody
     public String index() {
+        ArrayList<String> all = new ArrayList<>();
         return "posts index page";
     }
 
@@ -42,4 +45,17 @@ public class PostController {
     //Inside the method that shows an individual post, create a new post object and pass it to the view.
     //Inside the method that shows all the posts, create a new array list and add two post objects to it, then pass that list to the view.
     //In these two pages, you should display information based on the data passed from the controller.
+
+//    @PostMapping("/posts/index")
+//    @ResponseBody
+//    public String all() {
+//        return "all posts page";
+//    }
+//
+//    @GetMapping("/posts/show")
+//    @ResponseBody
+//    public String all() {
+//        return "all posts page";
+//    }
+
 }
