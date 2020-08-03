@@ -4,20 +4,34 @@ package models;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "dogs")
+@Table(name = "dogs")
 public class Dog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private long age;
+
     private String name;
+
     private String resideState;
 
     public Dog() {
     }
 
+    public Dog(long id, long age, String name, String resideState){
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.resideState = resideState;
+    }
 
+    public Dog(long age, String name, String resideState){
+        this.age = age;
+        this.name = name;
+        this.resideState = resideState;
+    }
 
     public long getId() {
         return id;
