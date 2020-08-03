@@ -12,10 +12,10 @@
     </div>
     <h1>Home landing page!</h1>
             <!--   placeholder after span -->
-    <h2>Welcome <span th:text="${cohort}"></span></h2>
+    <h2>Welcome, <span th:text="${cohort}"></span>!</h2>
 
     <form action="/" method="post">
-        <input type="text" name="cohort" id="cohort">
+        <input type="text" name="cohort" id="cohort" placeholder="What can I call you?">
         <button type="submit">Submit</button>
     </form>
 

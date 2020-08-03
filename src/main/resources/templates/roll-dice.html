@@ -10,14 +10,8 @@
         <span th:include="partials/navbar :: navbar"></span>
     </div>
 
-    <h1>Guess the number the die will roll:</h1>
+    <h1>Guess the number of the roll of one die:</h1>
 
-    <form action="/roll-dice">
-        <label for="guess"></label>
-        <input type="text" id="guess" name="guess">
-        <button type="submit">Submit</button>
-
-    </form>
 
 <!--    links to ea li will all point to a get request for a random number that
         then displays / dictate a url-->
@@ -30,6 +24,28 @@
         <li><a href="/roll-dice/6">6</a></li>
     </ul>
 
+    <h1>Guess the total of a roll of two dice:</h1>
+
+    <form action="/roll-dice">
+        <label for="guess">Enter number manually:</label>
+        <input type="text" id="guess" name="guess">
+        <button type="submit">Submit</button>
+    </form>
+
+    <ul>
+        <li><a href="/roll-dice/1">1</a></li>
+        <li><a href="/roll-dice/2">2</a></li>
+        <li><a href="/roll-dice/3">3</a></li>
+        <li><a href="/roll-dice/4">4</a></li>
+        <li><a href="/roll-dice/5">5</a></li>
+        <li><a href="/roll-dice/6">6</a></li>
+        <li><a href="/roll-dice/7">7</a></li>
+        <li><a href="/roll-dice/8">8</a></li>
+        <li><a href="/roll-dice/9">9</a></li>
+        <li><a href="/roll-dice/10">10</a></li>
+        <li><a href="/roll-dice/11">11</a></li>
+        <li><a href="/roll-dice/12">12</a></li>
+    </ul>
 <!--    <div th:each="side : ${dieRoll}">-->
 <!--        <p th:text="${side.value}"></p>-->
 <!--    </div>-->
