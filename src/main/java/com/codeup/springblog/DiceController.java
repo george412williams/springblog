@@ -51,6 +51,25 @@ public class DiceController {
         return "roll-results";
     }
 
+    @GetMapping("/roll-two-results/{guess}")
+    public String viewDiceResults(@PathVariable int guess, Model model){
+        int diceRoll = (int) (Math.random() * 12) + 1;
+        String message;
+
+        if(diceRoll == guess){
+            message = "Yatze!";
+        }else{
+            message = "You are the weakest link. Goodbye.";
+        }
+
+        model.addAttribute("guess", guess);
+        model.addAttribute("diceRoll", diceRoll);
+        model.addAttribute("message", message);
+
+        return "roll-two-results";
+
+    }
+
 //    @RequestMapping(path = "/roll-dice/{guess}", method = RequestMethod.GET)
 //        @ResponseBody
 //        public String randDiceRoller(@PathVariable String guess, Model model) {
