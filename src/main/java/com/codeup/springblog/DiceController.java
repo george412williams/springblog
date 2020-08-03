@@ -32,12 +32,33 @@ public class DiceController {
         return "roll-dice";
     }
 
-    @RequestMapping(path = "/roll-dice/{guess}", method = RequestMethod.GET)
-        @ResponseBody
-        public String randDiceRoller(@PathVariable String guess, Model model) {
-            model.addAttribute("guess", guess);
-            return "roll-dice";
+    @GetMapping("/roll-dice/{guess}")
+    public String viewResults(@PathVariable int guess, Model model){
+
+        int diceRoll = (int) (Math.random() * 6) + 1;
+        String message;
+
+        if(diceRoll == guess){
+            message = "Bingo!";
+        }else{
+            message = "No cigar.";
+        }
+
+        model.addAttribute("guess", guess);
+        model.addAttribute("diceRoll", diceRoll);
+        model.addAttribute("message", message);
+
+        return "roll-results";
     }
+
+//    @RequestMapping(path = "/roll-dice/{guess}", method = RequestMethod.GET)
+//        @ResponseBody
+//        public String randDiceRoller(@PathVariable String guess, Model model) {
+//            model.addAttribute("guess", guess);
+//            ArrayList<Integer> dieRoll = new ArrayList<>();
+//
+//            return "roll-dice";
+    //}
 
 
 

@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-    <span th:include="partials/header :: header"></span>
     <title>Roll of the Dice</title>
+    <span th:include="partials/header :: header"></span>
 </head>
 <body>
     <div>
@@ -22,13 +22,17 @@
 <!--    links to ea li will all point to a get request for a random number that
         then displays / dictate a url-->
     <ul>
-        <li><a href="/roll-dice/">1</a></li>
-        <li><a href="/roll-dice">2</a></li>
-        <li><a href="/roll-dice">3</a></li>
-        <li><a href="/roll-dice">4</a></li>
-        <li><a href="/roll-dice">5</a></li>
-        <li><a href="/roll-dice">6</a></li>
+        <li><a href="/roll-dice/1">1</a></li>
+        <li><a href="/roll-dice/2">2</a></li>
+        <li><a href="/roll-dice/3">3</a></li>
+        <li><a href="/roll-dice/4">4</a></li>
+        <li><a href="/roll-dice/5">5</a></li>
+        <li><a href="/roll-dice/6">6</a></li>
     </ul>
+
+<!--    <div th:each="side : ${dieRoll}">-->
+<!--        <p th:text="${side.value}"></p>-->
+<!--    </div>-->
 
     <div>
         <span th:include="partials/footer :: footer"></span>

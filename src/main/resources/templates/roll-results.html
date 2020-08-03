@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Roll Results</title>
+    <span th:include="partials/header :: header"></span>
+</head>
+<body>
+<div>
+    <span th:include="partials/navbar :: navbar"></span>
+</div>
+<h1>Your guess:</h1>
+<span th:text="${guess}"></span>
+<!--<span th:text="${guess}"></span>-->
+<h1>Die roll:</h1>
+<span th:text="${diceRoll}"></span>
+
+<h3 th:text="${message}"></h3>
+
+<a href="/roll-dice">Do overs!</a>
+
+<div>
+    <span th:include="partials/footer :: footer"></span>
+</div>
+
+</body>
+</html>
