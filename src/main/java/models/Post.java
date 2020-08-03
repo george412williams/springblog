@@ -1,14 +1,23 @@
-
+package models;
 
 
 public class Post {
 
     private String title;
     private String body;
+    private long id;
+
+    public Post(){}
 
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Post(long id, String title, String body) {
+        this.title = title;
+        this.body = body;
+        this.id = id;
     }
 
     public String getTitle() {

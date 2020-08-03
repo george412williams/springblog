@@ -1,30 +1,39 @@
 package com.codeup.springblog;
 
 
+import models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
 
     @GetMapping("/posts")
-    @ResponseBody
-    public String index() {
-        ArrayList<String> allPosts = new ArrayList<String>();
-        allPosts.add(1, "bodyone");
-        allPosts.add(2, "bodytwo");
-        return "posts index page" + allPosts;
+    public String index(@PathVariable long id, Model model) {
+        ArrayList<Post> myPosts = new ArrayList<>();
+        myPosts.add(new Post(2,"Blog2","Blog2 Text"));
+        myPosts.add(new Post(3,"Blog3","Blog2 Text"));
+        myPosts.add(new Post(4,"Blog4","Blog4 Text"));
+        model.addAttribute("posts", myPosts);
+//        ArrayList<String> allPosts = new ArrayList<String>();
+//        allPosts.add(1, "bodyone");
+//        allPosts.add(2, "bodytwo");
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
     public String show(
             @PathVariable long id,
-            @PathVariable String title,
-            @PathVariable String body) {
-        return "view an individual post: " + id + title + body;
+            Model model) {
+        Post myPost = new Post(1, "blog1", "Hey there");
+        model.addAttribute("title", myPost.getTitle());
+        model.addAttribute("body", myPost.getBody());
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
@@ -51,7 +60,7 @@ public class PostController {
     //Inside the method that shows all the posts, create a new array list and add two post objects to it, then pass that list to the view.
     //In these two pages, you should display information based on the data passed from the controller.
 
-//    @PostMapping("/posts/index")
+//    @PostMapping("/index")
 //    @ResponseBody
 //    public String all() {
 //        return "all posts page";

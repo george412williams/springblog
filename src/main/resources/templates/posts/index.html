@@ -3,10 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>View All Posts</title>
 </head>
 <body>
 <h1>Index</h1>
-<h2></h2>
+<!--<ul>-->
+<!--    <li th:each${myPosts}></li>-->
+<!--</ul>-->
+
+    <div th:each="post : ${posts}">
+
+        <h1 th:text="${post.title}"></h1>
+
+        <p th:text="${post.body}"></p>
+
+    </div>
 </body>
 </html>
