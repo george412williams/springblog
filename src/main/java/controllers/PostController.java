@@ -51,13 +51,15 @@ public class PostController {
     public String saveEdit(@RequestParam(name = "title") String title){
         Post postToUpdate = new Post();
         postToUpdate.setTitle(title);
-
-       return "posts/show";
+        postDao.save(postToUpdate);
+        return "redirect: posts/show";
+//       return "posts/show";
     }
 
     //for deleting
     @PostMapping("/posts/delete/{id}")
     public String deletePost(@PathVariable long id) {
+
         return "posts/index";
     }
 
