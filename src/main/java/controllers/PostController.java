@@ -23,15 +23,13 @@ public class PostController {
     //======== end injection
 
     @GetMapping("/posts")
-    public String index(@PathVariable long id, Model model) {
-        ArrayList<Post> myPosts = new ArrayList<>();
-        myPosts.add(new Post(2, "Blog2","Blog2 Text"));
-        myPosts.add(new Post(3, "Blog3","Blog2 Text"));
-        myPosts.add(new Post(4, "Blog4","Blog4 Text"));
-        model.addAttribute("posts", myPosts);
-//        ArrayList<String> allPosts = new ArrayList<String>();
-//        allPosts.add(1, "bodyone");
-//        allPosts.add(2, "bodytwo");
+    public String index(Model model) {
+        //simulated table items for testing prior to learning dependency injection
+//        ArrayList<Post> myPosts = new ArrayList<>();
+//        myPosts.add(new Post(2, "Blog2","Blog2 Text"));
+//        myPosts.add(new Post(3, "Blog3","Blog2 Text"));
+//        myPosts.add(new Post(4, "Blog4","Blog4 Text"));
+        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
