@@ -1,4 +1,4 @@
-package com.codeup.springblog;
+package controllers;
 
 
 import models.Post;
