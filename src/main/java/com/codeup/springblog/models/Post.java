@@ -1,4 +1,4 @@
-package models;
+package com.codeup.springblog.models;
 
 import javax.persistence.*;
 
@@ -18,16 +18,17 @@ public class Post {
 
     public Post(){}
 
-    public Post(String title, String body) {
-        this.title = title;
-        this.body = body;
-    }
-
     public Post(long id, String title, String body) {
         this.id = id;
         this.title = title;
         this.body = body;
     }
+
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
+
 
     public String getTitle() {
         return title;

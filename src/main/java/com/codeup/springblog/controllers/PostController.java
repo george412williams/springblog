@@ -1,20 +1,16 @@
-package controllers;
+package com.codeup.springblog.controllers;
 
 
-import models.Post;
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import repositories.PostRepository;
-
-import java.sql.ClientInfoStatus;
-import java.util.ArrayList;
-import java.util.List;
+import com.codeup.springblog.repositories.PostRepository;
 
 @Controller
 public class PostController {
 
-    //===== injection
+    //======== injection
     private final PostRepository postDao;
 
     public PostController(PostRepository postDao){
@@ -24,13 +20,13 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
+        model.addAttribute("posts", postDao.findAll());
+        return "posts/index";
         //simulated table items for testing prior to learning dependency injection
 //        ArrayList<Post> myPosts = new ArrayList<>();
 //        myPosts.add(new Post(2, "Blog2","Blog2 Text"));
 //        myPosts.add(new Post(3, "Blog3","Blog2 Text"));
 //        myPosts.add(new Post(4, "Blog4","Blog4 Text"));
-        model.addAttribute("posts", postDao.findAll());
-        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
@@ -38,28 +34,35 @@ public class PostController {
             @PathVariable long id,
             Model model) {
         Post myPost = new Post(id, "blog1", "Hey there");
-        model.addAttribute("title", myPost.getTitle());
-        model.addAttribute("body", myPost.getBody());
-        model.addAttribute("post", myPost);
+//        model.addAttribute("title", myPost.getTitle());
+//        model.addAttribute("body", myPost.getBody());
+        model.addAttribute("post", postDao.getOne(id));
         return "posts/show";
     }
 
-    //for editing
+    // edit ================
     @PostMapping("/posts/edit/{id}")
-    public String saveEdit(@RequestParam(name = "title") String title){
+    public String saveEdit(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
         Post postToUpdate = new Post();
         postToUpdate.setTitle(title);
         postDao.save(postToUpdate);
-        return "redirect: posts/show";
+        return "redirect:posts/show";
 //       return "posts/show";
+//        return "posts/edit";
+    }
+
+    @GetMapping("/posts/edit")
+    public String getEditPost(Model model){
+        model.addAttribute("posts",postDao.findAll());
+        return "/posts/edit";
     }
 
     //for deleting
-    @PostMapping("/posts/delete/{id}")
-    public String deletePost(@PathVariable long id) {
-
-        return "posts/index";
-    }
+    // there is a baked-in delete
+//    @PostMapping("/posts/delete/{id}")
+//    public String deletePost(@PathVariable long id) {
+//        return "posts/index";
+//    }
 
 
     @GetMapping("/posts/create")
@@ -67,12 +70,6 @@ public class PostController {
     public String create() {
         return "view the form for creating a post";
     }
-
-//    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String postBlog() {
-//        return "create a new post";
-//    }
 
     @PostMapping("/posts/create")
     @ResponseBody
@@ -86,16 +83,5 @@ public class PostController {
     //Inside the method that shows all the posts, create a new array list and add two post objects to it, then pass that list to the view.
     //In these two pages, you should display information based on the data passed from the controller.
 
-//    @PostMapping("/index")
-//    @ResponseBody
-//    public String all() {
-//        return "all posts page";
-//    }
-//
-//    @GetMapping("/posts/show")
-//    @ResponseBody
-//    public String all() {
-//        return "all posts page";
-//    }
 
 }
