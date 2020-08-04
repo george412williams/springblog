@@ -30,14 +30,13 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String show(
-            @PathVariable long id,
-            Model model) {
-        Post myPost = new Post(id, "blog1", "Hey there");
+    public String show(@PathVariable long id, Model model) {
+//        Post myPost = new Post(id, "blog1", "Hey there");
 //        model.addAttribute("title", myPost.getTitle());
 //        model.addAttribute("body", myPost.getBody());
-        model.addAttribute("post", postDao.getOne(id));
-        return "posts/show";
+        return postDao.getOne(id).toString();
+//        model.addAttribute("post", postDao.getOne(id));
+//        return "posts/show";
     }
 
     // edit ================
@@ -57,13 +56,14 @@ public class PostController {
         return "/posts/edit";
     }
 
-    //for deleting
-    // there is a baked-in delete
-//    @PostMapping("/posts/delete/{id}")
-//    public String deletePost(@PathVariable long id) {
-//        return "posts/index";
-//    }
-
+            //"/posts/edit/{id}"?
+    @PostMapping("/posts/delete/{id}")
+    public String delete(@PathVariable long id){
+//        Post postToDelete = new Post();
+//        postDao.delete(postToDelete);
+        postDao.deleteById(id);
+        return "redirect:posts/show";
+    }
 
     @GetMapping("/posts/create")
     @ResponseBody

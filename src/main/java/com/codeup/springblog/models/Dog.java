@@ -3,8 +3,8 @@ package com.codeup.springblog.models;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "dogs")
+//@Entity
+//@Table(name = "dogs")
 public class Dog {
 
     @Id

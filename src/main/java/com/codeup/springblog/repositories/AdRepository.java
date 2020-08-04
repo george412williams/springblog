@@ -26,11 +26,11 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
     //LEVEL 3
     //custom using query annotation
     // exs using JPQL(mainly) / HQL ('a' is a name of ad object)
-    @Query("from Ad a where a.id like ?1")
-    Ad getAdBy(long id);
-
-    @Query("select title from Ad where LENGTH(title) < 10")
-    List<String> getAdsOfCertainTitleLength();
+//    @Query("from Ad a where a.id like ?1")
+//    Ad getAdBy(long id);
+//
+//    @Query("select title from Ad where LENGTH(title) < 10")
+//    List<String> getAdsOfCertainTitleLength();
 
     //using native query which is: _____________ research
     //@Query(nativeQuery = true, value + "select title from ads where LENGTH(title) < 10")
