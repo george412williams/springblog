@@ -1,11 +1,20 @@
 package models;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "posts")
 public class Post {
 
-    private String title;
-    private String body;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(length = 50)
+    private String title;
+
+    @Column(length = 250)
+    private String body;
 
     public Post(){}
 
@@ -15,9 +24,9 @@ public class Post {
     }
 
     public Post(long id, String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
-        this.id = id;
     }
 
     public String getTitle() {

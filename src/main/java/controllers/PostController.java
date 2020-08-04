@@ -5,6 +5,7 @@ import models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import repositories.PostRepository;
 
 import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
@@ -12,6 +13,14 @@ import java.util.List;
 
 @Controller
 public class PostController {
+
+    //===== injection
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao){
+        this.postDao = postDao;
+    }
+    //======== end injection
 
     @GetMapping("/posts")
     public String index(@PathVariable long id, Model model) {
@@ -33,8 +42,25 @@ public class PostController {
         Post myPost = new Post(id, "blog1", "Hey there");
         model.addAttribute("title", myPost.getTitle());
         model.addAttribute("body", myPost.getBody());
+        model.addAttribute("post", myPost);
         return "posts/show";
     }
+
+    //for editing
+    @PostMapping("/posts/edit/{id}")
+    public String saveEdit(@RequestParam(name = "title") String title){
+        Post postToUpdate = new Post();
+        postToUpdate.setTitle(title);
+
+       return "posts/show";
+    }
+
+    //for deleting
+    @PostMapping("/posts/delete/{id}")
+    public String deletePost(@PathVariable long id) {
+        return "posts/index";
+    }
+
 
     @GetMapping("/posts/create")
     @ResponseBody
