@@ -9,11 +9,17 @@
 
 <h2 th:text="${post.title}"></h2>
 <h3 th:text="${post.body}"></h3>
+<div>
+    <h4>Username:</h4>
+    <h4 th:text="${user.username}"></h4>
+    <h5>User email:</h5>
+    <h5 th:text="${user.email}"></h5>
+</div>
 
 <!--consider putting edit/delete same, maybe sep for edit-->
 
 <!--request to view-->
-<a th:href="@{'/posts/' + ${post.id} + '/edit'}">Edity Post</a>
+<a th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit Post</a>
 <!--form to delete-->
 <form th:action="@{'/posts/' + ${post.id} + '/delete'}" th:method="POST">
 

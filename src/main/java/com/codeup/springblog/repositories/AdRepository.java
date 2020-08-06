@@ -21,7 +21,7 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
 
     //LEVEL 2
     //combine the right allowable terms:
-    Ad findDistinctFirstByTitleAsc();
+    Ad findDistinctFirstByTitle(String title);
 
     //LEVEL 3
     //custom using query annotation

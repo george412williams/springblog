@@ -16,15 +16,9 @@ public class Post {
     @Column(nullable = false, length = 250)
     private String body;
 
+
+    // CONSTRUCTORS
     public Post() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Post(long id, String title, String body) {
@@ -38,6 +32,15 @@ public class Post {
         this.body = body;
     }
 
+
+    // GTRS/STRS
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -54,6 +57,9 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
+
+    //=======
+
 
     @Override
     public String toString() {
