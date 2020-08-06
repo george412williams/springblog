@@ -14,14 +14,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(length = 20, nullable = false, unique = true)
     private String username;
 
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
 
+    @Column(length = 50, nullable = false, unique = true)
     private String password;
 
-    @OneToMany(mappedBy = "usersPost")
-    @JsonManagedReference
+    //
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+//    @JsonManagedReference
     private List<Post> posts;
     public List<Post> getPost() {
         return posts;
@@ -29,6 +35,8 @@ public class User {
 
     public User() {
     }
+
+
 
     public long getId() {
         return id;

@@ -17,7 +17,7 @@ public class PostController {
 
 
 
-    //======== post injection
+    //======== post and user injection
     private final PostRepository postDao;
     private final UserRepository userDao;
 
@@ -25,7 +25,7 @@ public class PostController {
         this.postDao = postDao;
         this.userDao = userDao;
     }
-    //======== end post injection
+    //======== end injections
 
 
 //    @GetMapping("/profile")
@@ -106,16 +106,19 @@ public class PostController {
         //where you redirect is where the controller is listening with getmapping
     }
 
+    // New Post =============
     @GetMapping("/posts/create")
-    @ResponseBody
+//    @ResponseBody // removed now bc is now directing
     public String create() {
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String insert(){
-        return "post has been created";
+    public String insert(@RequestParam String title, @RequestParam String body){
+        User user = userDao.getOne(1L);
+        Post post = new Post(title, body);
+        postDao.save(post);
+        return "redirect:/posts";
     }
 
     //Edit your PostController class to return the views you created above.

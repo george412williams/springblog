@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+</head>
+<body>
+<h1>Create a Post:</h1>
+
+<!--post will process it, get will ______-->
+<form th:action="@{'/posts/create'}" th:method="POST">
+
+    <div>
+        <label for="title">Title</label>
+<!--        keeping the value here can allow for sticky forms if user errors-->
+<!--        <input type="text" name="title" id="title" th:value="${post.title}">-->
+        <input type="text" name="title" id="title">
+    </div>
+
+    <div>
+        <label for="body">Body</label>
+        <textarea name="body" id="body"></textarea>
+<!--        <textarea name="body" id="body" th:text="${post.body}"></textarea>-->
+    </div>
+    <button>Create Post</button>
+</form>
+
+
+</body>
+</html>

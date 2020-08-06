@@ -15,7 +15,7 @@ import java.util.List;
 public class AdController {
 
     //THIS IS HOW YOU MAKE YOU'RE OWN API SERVICE
-
+        //IOC of Spring does this, Inversion of Control container, framework makes the objects based on definition which is the dependency injection,
     //==========================
     //dependency injection
 

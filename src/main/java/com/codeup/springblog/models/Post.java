@@ -15,13 +15,13 @@ public class Post {
     @Column(nullable = false, unique = true, length = 100)
     private String title;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String body;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private Post usersPost;
+//    @JsonBackReference
+    private User author;
 
     // CONSTRUCTORS
     public Post() {
