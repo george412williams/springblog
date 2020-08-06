@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/home")
     //@ResponseBody
     public String home(){
         return "home";
     }
 
-    @PostMapping("/")
+    @PostMapping("/home")
     public String returnCohort(@RequestParam(name = "cohort") String cohort, Model model) {
         model.addAttribute("cohort", cohort);
         return "home";

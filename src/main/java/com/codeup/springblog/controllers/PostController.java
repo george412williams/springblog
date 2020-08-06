@@ -63,7 +63,7 @@ public class PostController {
     }
 
     // edit ================
-    @PostMapping("/posts/edit/{id}")
+    @PostMapping("/posts/{id}/edit")
     public String update(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
 //        Post postToUpdate = new Post(); //old way
         //get post from db to edit
@@ -93,7 +93,6 @@ public class PostController {
     }
 
     // delete ================
-            //"/posts/delete/{id}"?
     @PostMapping("/posts/{id}/delete}")
     public String deletePost(@PathVariable long id){
         //old way

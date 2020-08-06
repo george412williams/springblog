@@ -12,40 +12,40 @@
 <h1>edit this post:</h1>
 
 <!--post will process it, get will ______-->
-<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">
+<form th:action="@{'/posts/' + ${posts.id} + '/edit'}" th:method="POST">
 <!--    <form th:action="@{'/posts/${post.id} + /edit'}" th:method="POST">-->
 <!--    ^ there is an alt syntax, not correct currently-->
     <div>
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" th:value="${post.title}">
+        <input type="text" name="title" id="title" th:value="${posts.title}">
     </div>
 
     <div>
         <label for="body">Body</label>
-        <textarea name="body" id="body" th:text="${post.body}"></textarea>
+        <textarea name="body" id="body" th:text="${posts.body}"></textarea>
     </div>
     <button>Make Edit</button>
 </form>
 
-    <div th:each="post : ${posts}">
-<form th:action="@{'/posts/edit' + ${post.id}}" method="post">
+<!--    <div th:each="post : ${posts}">-->
+<!--<form th:action="@{'/posts/edit' + ${posts.id}}" method="post">-->
 <!--    form action:-->
 <!--th:action="@{/posts/{id}(id=${singlepoast or mypoast.id})}">-->
-    <input type="hidden" name="id" value="${post.id}">
-    <tr>
-        <td>
-        </td>
-        <input type="text">
-        <td></td>
-        <input type="text">
+<!--    <input type="hidden" name="id" value="${post.id}">-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--        </td>-->
+<!--        <input type="text">-->
+<!--        <td></td>-->
+<!--        <input type="text">-->
 
-    </tr>
-</form>
-    </div>
-    <form action="th:action="@{'/posts/' + ${post.id} + '/delete'}"" method="post">
-        <h1>delete</h1>
-        <button type="submit">Submit</button>
-    </form>
+<!--    </tr>-->
+<!--</form>-->
+<!--    </div>-->
+<!--    <form action="th:action="@{'/posts/' + ${post.id} + '/delete'}"" method="post">-->
+<!--        <h1>delete</h1>-->
+<!--        <button type="submit">Submit</button>-->
+<!--    </form>-->
 
 </body>
 </html>

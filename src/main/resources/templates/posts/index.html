@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>View All Posts</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body>
+<a href="/posts/create">Create</a>
 <h1>Index</h1>
 <!--<ul>-->
 <!--    <li th:each${myPosts}></li>-->
 <!--</ul>-->
 
     <div th:each="post : ${posts}">
+        <a href="/posts/{id}/edit">
+        <h1 th:text="${post.title}"></h1></a>
 
-        <h1 th:text="${posts.title}"></h1>
-
-        <p th:text="${posts.body}"></p>
+        <p th:text="${post.body}"></p>
 
     </div>
 </body>
