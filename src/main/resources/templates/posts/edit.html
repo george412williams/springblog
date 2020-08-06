@@ -7,6 +7,26 @@
 </head>
 <body>
 
+<!--for single post view:-->
+
+<h1>edit this post:</h1>
+
+<!--post will process it, get will ______-->
+<form th:action="@{'/posts/' + ${post.id} + '/edit'}" th:method="POST">
+<!--    <form th:action="@{'/posts/${post.id} + /edit'}" th:method="POST">-->
+<!--    ^ there is an alt syntax, not correct currently-->
+    <div>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" th:value="${post.title}">
+    </div>
+
+    <div>
+        <label for="body">Body</label>
+        <textarea name="body" id="body" th:text="${post.body}"></textarea>
+    </div>
+    <button>Make Edit</button>
+</form>
+
     <div th:each="post : ${posts}">
 <form th:action="@{'/posts/edit' + ${post.id}}" method="post">
 <!--    form action:-->
@@ -22,7 +42,7 @@
     </tr>
 </form>
     </div>
-    <form action="@{/posts/{id}(id=${singlepoast or mypoast.id})}" method="post">
+    <form action="th:action="@{'/posts/' + ${post.id} + '/delete'}"" method="post">
         <h1>delete</h1>
         <button type="submit">Submit</button>
     </form>

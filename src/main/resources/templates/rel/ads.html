@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h2>Ads with Comments</h2>
+
+    <div th:each="ad : ${ads}">
+        <h3 th:text="${ad.title}"></h3>
+        <p th:text="${ad.description}"></p>
+<!--        now add comments, w bootstrap could add a card for it here-->
+        <ul>
+            <li th:each="comment : ${ad.comments}" th:text="${comment.content}"></li>
+<!--            for later, experiement w adding/joining w user table -->
+<!--            <li th:each="user : ${ad.user_id}"></li>-->
+        </ul>
+
+<!--        <p th:text="${ad.user.email}"></p>-->
+    </div>
+
+</body>
+</html>

@@ -10,13 +10,21 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 50)
+    @Column(nullable = false, unique = true, length = 100)
     private String title;
 
-    @Column(length = 250)
+    @Column(nullable = false, length = 250)
     private String body;
 
     public Post() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Post(long id, String title, String body) {

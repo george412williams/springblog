@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.springblog.repositories.PostRepository;
 
+import java.util.List;
+
 @Controller
 public class PostController {
 
@@ -20,9 +22,13 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        model.addAttribute("posts", postDao.findAll());
+        List<Post> myPosts = postDao.findAll();
+            //making a list for validation on posting side, may not matter
+        model.addAttribute("posts", myPosts);
+            //need to be flexable for the storage
         return "posts/index";
         //simulated table items for testing prior to learning dependency injection
+        //the repository leads to the injection which gives you postDao which then gives you all posts
 //        ArrayList<Post> myPosts = new ArrayList<>();
 //        myPosts.add(new Post(2, "Blog2","Blog2 Text"));
 //        myPosts.add(new Post(3, "Blog3","Blog2 Text"));
@@ -32,37 +38,58 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String show(@PathVariable long id, Model model) {
 //        Post myPost = new Post(id, "blog1", "Hey there");
-//        model.addAttribute("title", myPost.getTitle());
-//        model.addAttribute("body", myPost.getBody());
-        return postDao.getOne(id).toString();
 //        model.addAttribute("post", postDao.getOne(id));
 //        return "posts/show";
+        Post singlePost = postDao.getOne(id);
+//        model.addAttribute("title", singlePost.getTitle());
+//        model.addAttribute("body", singlePost.getBody());
+        //refactor to: (because all attribs will go, don't have to write a line for every attrib bigger real world
+        model.addAttribute("post", singlePost);
+        return postDao.getOne(id).toString();
     }
 
     // edit ================
     @PostMapping("/posts/edit/{id}")
-    public String saveEdit(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-        Post postToUpdate = new Post();
+    public String update(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+//        Post postToUpdate = new Post(); //old way
+        //get post from db to edit
+        Post postToUpdate = postDao.getOne(id);
+        //these must match the names in form fields:
+        //then set the post to edit title and body w values/params from the request
         postToUpdate.setTitle(title);
+        postToUpdate.setBody(body);
+        //now save the changes to the db w the built in method
         postDao.save(postToUpdate);
-        return "redirect:posts/show";
+        //redirect to that id's page
+        return "redirect:/posts/" + id;
+        // or mine:
+        //return "redirect:posts/show";
 //       return "posts/show";
-//        return "posts/edit";
+
+        // NOTE: may delete body if empty, in logic: if(body = null){do not save; return body;}
+        //if(!body.isempty()), postDao.
     }
 
-    @GetMapping("/posts/edit")
-    public String getEditPost(Model model){
-        model.addAttribute("posts",postDao.findAll());
+//    THE VIEW TO EDIT THE POST
+    @GetMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, Model model){
+        //send to view of specific post:
+        model.addAttribute("posts",postDao.getOne(id));
         return "/posts/edit";
     }
 
-            //"/posts/edit/{id}"?
-    @PostMapping("/posts/delete/{id}")
-    public String delete(@PathVariable long id){
+    // delete ================
+            //"/posts/delete/{id}"?
+    @PostMapping("/posts/{id}/delete}")
+    public String deletePost(@PathVariable long id){
+        //old way
 //        Post postToDelete = new Post();
 //        postDao.delete(postToDelete);
         postDao.deleteById(id);
-        return "redirect:posts/show";
+        return "redirect:/posts";
+        //need a getmapping to index to do this:
+        //return "redirect:/index";
+        //where you redirect is where the controller is listening with getmapping
     }
 
     @GetMapping("/posts/create")
