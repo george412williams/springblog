@@ -53,13 +53,14 @@ public class PostController {
     public String show(@PathVariable long id, Model model) {
 //        Post myPost = new Post(id, "blog1", "Hey there");
 //        model.addAttribute("post", postDao.getOne(id));
-//        return "posts/show";
         Post singlePost = postDao.getOne(id);
 //        model.addAttribute("title", singlePost.getTitle());
 //        model.addAttribute("body", singlePost.getBody());
         //refactor to: (because all attribs will go, don't have to write a line for every attrib bigger real world
         model.addAttribute("post", singlePost);
-        return postDao.getOne(id).toString();
+        //return postDao.getOne(id).toString();
+//        return "redirect:/posts/" + id;
+        return "posts/show";
     }
 
     // edit ================
@@ -93,13 +94,13 @@ public class PostController {
     }
 
     // delete ================
-    @PostMapping("/posts/{id}/delete}")
+    @PostMapping("/posts/{id}/delete")
     public String deletePost(@PathVariable long id){
         //old way
 //        Post postToDelete = new Post();
 //        postDao.delete(postToDelete);
         postDao.deleteById(id);
-        return "redirect:/posts";
+        return "redirect:/posts/";
         //need a getmapping to index to do this:
         //return "redirect:/index";
         //where you redirect is where the controller is listening with getmapping

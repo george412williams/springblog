@@ -8,18 +8,18 @@
 
 </head>
 <body>
-<a href="/posts/create">Create</a>
-<h1>Index</h1>
+<a href="/posts/create"><h2>Create</h2></a>
+<h1>Post Index</h1>
 <!--<ul>-->
 <!--    <li th:each${myPosts}></li>-->
 <!--</ul>-->
 
     <div th:each="post : ${posts}">
-        <a href="/posts/{id}/edit">
+        <a th:href="@{/posts/{id}(id=${post.id})}" th:value="${post.id}">
         <h1 th:text="${post.title}"></h1></a>
 
         <p th:text="${post.body}"></p>
-
+<!--    <button th:href="/posts/${post}/edit">Update</button>-->
     </div>
 </body>
 </html>
