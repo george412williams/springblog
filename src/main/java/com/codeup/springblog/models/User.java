@@ -1,11 +1,14 @@
 package com.codeup.springblog.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
-public class Users {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +20,14 @@ public class Users {
 
     private String password;
 
-    public Users() {
+    @OneToMany(mappedBy = "usersPost")
+    @JsonManagedReference
+    private List<Post> posts;
+    public List<Post> getPost() {
+        return posts;
+    }
+
+    public User() {
     }
 
     public long getId() {
