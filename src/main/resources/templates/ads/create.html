@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<!--<head th:include="partials/header :: header-links">-->
+<head>
+    <meta charset="UTF-8">
+    <title>Create Ad</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+
+<main class="container ">
+
+    <!-- WITHOUT form model binding -->
+<!--    <form action="/ads/create" method="post">-->
+<!--        Title:-->
+<!--        <input name="title" />-->
+<!--        <br />-->
+<!--        Description:-->
+<!--        <input name="description" />-->
+<!--        <br />-->
+<!--        <input type="submit" />-->
+<!--    </form>-->
+
+    <!-- form goes to ads/create controller captures it-->
+
+<!-- NEW WAY W bootstrap -->
+                                        <!-- referencing incoming ad object, wo it the fields will not have anything
+                                        to refer to, the thymeleaf reference field  -->
+    <form action="/ads/create" method="post" th:object="${ad}">
+        <div class="form-group">
+            <label for="title">Title</label>
+                                                                <!--  This is where the properties of the obj go  -->
+            <input type="text" class="form-control" id="title" th:field="*{title}">
+                                                                        <!-- now to controller -->
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" th:field="*{description}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</main>
+
+</body>
+</html>

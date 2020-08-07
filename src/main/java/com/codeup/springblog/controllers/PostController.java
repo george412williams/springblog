@@ -36,7 +36,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        List<Post> myPosts = postDao.findAll();
+        List<Post> myPosts = postDao.findAllByOrderByIdDesc();
             //making a list for validation on posting side, may not matter
         model.addAttribute("posts", myPosts);
             //need to be flexable for the storage
@@ -102,24 +102,43 @@ public class PostController {
         postDao.deleteById(id);
         return "redirect:/posts/";
         //need a getmapping to index to do this:
-        //return "redirect:/index";
         //where you redirect is where the controller is listening with getmapping
     }
 
-    // New Post =============
+    // New Post ============= [before form model binding
+
+//    @GetMapping("/posts/create")
+////    @ResponseBody // removed now bc is now redirecting
+//    public String create() {
+//        return "posts/create";
+//    }
+//
+//    @PostMapping("/posts/create")
+//    public String insert(@RequestParam String title, @RequestParam String body){
+//        User user = userDao.getOne(1L);
+//        Post post = new Post(title, body);
+//        postDao.save(post);
+//        return "redirect:/posts";
+//    }
+
+    // New Post ============== now with FORM MODEL BINDING!
+
+        //Get: add Model, add attrib for new obj
+
     @GetMapping("/posts/create")
-//    @ResponseBody // removed now bc is now directing
-    public String create() {
+    public String showCreateForm(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
+        //Post: remove reqParams, replace with @ModelAtt obj, remove old logic
+
     @PostMapping("/posts/create")
-    public String insert(@RequestParam String title, @RequestParam String body){
-        User user = userDao.getOne(1L);
-        Post post = new Post(title, body);
+    public String createPost(@ModelAttribute Post post){
         postDao.save(post);
         return "redirect:/posts";
     }
+
 
     //Edit your PostController class to return the views you created above.
     //

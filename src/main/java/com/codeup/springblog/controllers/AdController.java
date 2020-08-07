@@ -4,9 +4,7 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.models.Ad;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.codeup.springblog.repositories.AdRepository;
 
 import java.util.List;
@@ -38,10 +36,10 @@ public class AdController {
         return adsDao.findAll();
     }
 
-    //returning view wo json, the string rep's the data
+    //returning view wo json, the string rep's the data (previous method)
     @GetMapping("/ads/view")
     public String getAdsIndex(Model model) {
-        model.addAttribute("ads", adsDao.findAll());
+        model.addAttribute("ads", adsDao.findAllByOrderByIdDesc());
         return "/ads/index";
     }
 
@@ -85,6 +83,44 @@ public class AdController {
             //case sensitive right now
     }
 
+    // ======================= version WITHOUT form model binding
 
+//    @GetMapping("/ads/create")
+//    public String showCreateForm() {
+//        return "ads/create";
+//    }
+//    @PostMapping("/ads/create")
+//    @ResponseBody
+//    public String create(
+//            @RequestParam(name = "title") String title,
+//            @RequestParam(name = "description") String description
+//    ) {
+//        Ad ad = new Ad();
+//        ad.setTitle(title);
+//        ad.setDescription(description);
+//        // save the ad...
+//        return "Ad saved!";
+//    }
+
+    // ========== WITH form model binding
+
+    //retrieving the object to fill
+    @GetMapping("/ads/create")
+    public String showCreateForm(Model model){
+        //in order to get, send in the object of the correct shape to get the stuff
+        model.addAttribute("ad", new Ad());
+        //sending in empty ad obj
+        return "ads/create";
+    }
+
+    //
+    @PostMapping("/ads/create")
+    public String createAd(@ModelAttribute Ad ad){
+        adsDao.save(ad);
+        //what do we return? the view of all ads or the ad/post view
+        return "redirect:/ads/view";
+            //user now goes to see whole list of ads to verify addition
+        //redirect makes sure the page it goes to does its work and not just shows
+    }
 
 }

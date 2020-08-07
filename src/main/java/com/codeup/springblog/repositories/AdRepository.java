@@ -29,8 +29,8 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
 //    @Query("from Ad a where a.id like ?1")
 //    Ad getAdBy(long id);
 //
-//    @Query("select title from Ad where LENGTH(title) < 10")
-//    List<String> getAdsOfCertainTitleLength();
+    @Query("select title from Ad where LENGTH(title) < 10")
+    List<String> getAdsOfCertainTitleLength();
 
     //using native query which is: _____________ research
     //@Query(nativeQuery = true, value + "select title from ads where LENGTH(title) < 10")
@@ -39,4 +39,9 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
     //LEVEL 1: first you have baked in meths
     //LEVEL 2: then you can combo the right terms to get what you need
     //LEVEL 3: then you can @Query any java and sql
+
+    @Query(nativeQuery = true, value = "select title from ads where length(title) < 10")
+    List<String> getAdsOfCertainTitleLengthNative();
+    //returns ads in reverse order
+    List<Ad> findAllByOrderByIdDesc();
 }

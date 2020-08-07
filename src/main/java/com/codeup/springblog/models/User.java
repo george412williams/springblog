@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,15 +24,20 @@ public class User {
     @Column(length = 50, nullable = false, unique = true)
     private String password;
 
-    //
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    @JsonManagedReference
     private List<Post> posts;
+
     public List<Post> getPost() {
         return posts;
     }
+
+    public void setPost(List<Post> posts) {
+        this.posts = posts;
+    }
+
+
 
     public User() {
     }

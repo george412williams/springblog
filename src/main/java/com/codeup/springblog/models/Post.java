@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -21,7 +22,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
 //    @JsonBackReference
-    private User author;
+    private User user;
 
     // CONSTRUCTORS
     public Post() {
