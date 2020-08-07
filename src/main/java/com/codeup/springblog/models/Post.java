@@ -19,6 +19,19 @@ public class Post {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String body;
 
+    public Post(long id, User user) {
+        this.id = id;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
 //    @JsonBackReference

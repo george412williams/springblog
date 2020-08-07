@@ -27,25 +27,27 @@
     <button>Make Edit</button>
 </form>
 
-<!--    <div th:each="post : ${posts}">-->
-<!--<form th:action="@{'/posts/edit' + ${posts.id}}" method="post">-->
-<!--    form action:-->
-<!--th:action="@{/posts/{id}(id=${singlepoast or mypoast.id})}">-->
-<!--    <input type="hidden" name="id" value="${post.id}">-->
-<!--    <tr>-->
-<!--        <td>-->
-<!--        </td>-->
-<!--        <input type="text">-->
-<!--        <td></td>-->
-<!--        <input type="text">-->
+    <div th:each="post : ${posts}">
+<form th:action="@{'/posts/edit' + ${posts.id}}" method="post">
+    form action:
+th:action="@{/posts/{id}(id=${singlepoast or mypoast.id})}">
+    <input type="hidden" name="id" value="${post.id}">
+    <tr>
+        <td>
+        </td>
+        <input type="text">
+        <td></td>
+        <input type="text">
 
-<!--    </tr>-->
-<!--</form>-->
-<!--    </div>-->
-<!--    <form action="th:action="@{'/posts/' + ${post.id} + '/delete'}"" method="post">-->
-<!--        <h1>delete</h1>-->
-<!--        <button type="submit">Submit</button>-->
-<!--    </form>-->
+    </tr>
+</form>
+    </div>
+
+
+    <form th:action="@{'/posts/' + ${posts.id} + '/delete'}" method="post">
+        <h1>delete</h1>
+        <button type="submit">Submit</button>
+    </form>
 
 </body>
 </html>

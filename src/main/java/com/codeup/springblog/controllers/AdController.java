@@ -118,7 +118,7 @@ public class AdController {
     public String createAd(@ModelAttribute Ad ad){
         adsDao.save(ad);
         //what do we return? the view of all ads or the ad/post view
-        return "redirect:/ads/view";
+        return "redirect:/ads";
             //user now goes to see whole list of ads to verify addition
         //redirect makes sure the page it goes to does its work and not just shows
     }

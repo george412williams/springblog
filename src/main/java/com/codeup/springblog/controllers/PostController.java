@@ -67,17 +67,19 @@ public class PostController {
 
     // edit ================
     @PostMapping("/posts/{id}/edit")
-    public String update(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+    public String update(@PathVariable long id, @ModelAttribute Post posts){
 //        Post postToUpdate = new Post(); //old way
         //get post from db to edit
-        Post postToUpdate = postDao.getOne(id);
+//        Post postToUpdate = postDao.getOne(id);
         //these must match the names in form fields:
         //then set the post to edit title and body w values/params from the request
-        postToUpdate.setTitle(title);
-        postToUpdate.setBody(body);
+//        postToUpdate.setTitle(title);
+//        postToUpdate.setBody(body);
         //now save the changes to the db w the built in method
-        postDao.save(postToUpdate);
+//        postDao.save(postToUpdate);
+        postDao.save(posts);
         //redirect to that id's page
+
         return "redirect:/posts/" + id;
         // or mine:
         //return "redirect:posts/show";
@@ -86,6 +88,7 @@ public class PostController {
         // NOTE: may delete body if empty, in logic: if(body = null){do not save; return body;}
         //if(!body.isempty()), postDao.
     }
+
 
 //    THE VIEW TO EDIT THE POST
     @GetMapping("/posts/{id}/edit")
@@ -125,7 +128,7 @@ public class PostController {
 
     // New Post ============== now with FORM MODEL BINDING!
 
-        //Get: add Model, add attrib for new obj
+        //Get: add Model, add attrib for new obj in order to expose the view to the object
 
     @GetMapping("/posts/create")
     public String showCreateForm(Model model) {
@@ -137,6 +140,9 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post){
+        //hardcoding placeholder for now; to address user_id
+        User user = userDao.getOne(1L);
+        post.setUser(user);
         postDao.save(post);
         return "redirect:/posts";
     }
