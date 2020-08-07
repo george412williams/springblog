@@ -36,7 +36,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        List<Post> myPosts = postDao.findAllByOrderByIdDesc();
+        List<Post> myPosts = postDao.findAll();
             //making a list for validation on posting side, may not matter
         model.addAttribute("posts", myPosts);
             //need to be flexable for the storage
