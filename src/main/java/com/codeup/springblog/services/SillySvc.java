@@ -1,4 +1,4 @@
-package services;
+package com.codeup.springblog.services;
 
 
 import com.codeup.springblog.models.Post;

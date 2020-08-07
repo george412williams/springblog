@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import services.EmailService;
-import services.GreetingSvc;
-import services.SillySvc;
+import com.codeup.springblog.services.EmailService;
+import com.codeup.springblog.services.GreetingSvc;
+import com.codeup.springblog.services.SillySvc;
 
 //here have control over you fxality, like a service you call in but don't have access to
 //to change the fx's logic, but here you can
@@ -19,7 +19,7 @@ public class ServiceTestController {
     //inject now
     private GreetingSvc greetingSvc;
     private SillySvc sillySvc;
-    //injecting emial service
+    //injecting email service
     private EmailService emailService;
     private PostRepository postDao;
 

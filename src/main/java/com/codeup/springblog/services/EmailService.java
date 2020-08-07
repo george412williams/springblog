@@ -1,4 +1,4 @@
-package services;
+package com.codeup.springblog.services;
 
 
 import com.codeup.springblog.models.Post;
@@ -19,7 +19,7 @@ public class EmailService {
     //NOTE: pulls property defined in app properties and assigns to variable its createing
         //will see this syntax much in capstone
         //pulling from: the email line inthe app.props file
-    @Value("${spring.mail.from")
+    @Value("${spring.mail.from}")
     private String from;
 
 

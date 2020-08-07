@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.services.EmailService;
 
 import java.util.List;
 
@@ -20,10 +21,13 @@ public class PostController {
     //======== post and user injection
     private final PostRepository postDao;
     private final UserRepository userDao;
+    //email service
+    private EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService){
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
     //======== end injections
 
@@ -151,6 +155,7 @@ public class PostController {
         User user = userDao.getOne(1L);
         post.setUser(user);
         postDao.save(post);
+        emailService.prepareAndSend(postDao.getOne(1L),"Post created!","You have created a post. If you received this in error, do something about it");
         return "redirect:/posts";
     }
 
