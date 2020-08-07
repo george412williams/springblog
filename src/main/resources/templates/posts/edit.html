@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body>
 
@@ -11,7 +13,6 @@
 
 <h1>edit this post:</h1>
 
-<!--post will process it, get will ______-->
 <form th:action="@{'/posts/' + ${posts.id} + '/edit'}" th:method="POST">
 <!--    <form th:action="@{'/posts/${post.id} + /edit'}" th:method="POST">-->
 <!--    ^ there is an alt syntax, not correct currently-->
@@ -24,30 +25,53 @@
         <label for="body">Body</label>
         <textarea name="body" id="body" th:text="${posts.body}"></textarea>
     </div>
-    <button>Make Edit</button>
+
+    <button>Make Edit: show in full list</button>
+        <a class="btn btn-primary" th:href="@{/posts/{id}/edit(id=${posts.id})}" role="button">Edit: back to this page; Undoes changes</a>
 </form>
 
-    <div th:each="post : ${posts}">
-<form th:action="@{'/posts/edit' + ${posts.id}}" method="post">
-    form action:
-th:action="@{/posts/{id}(id=${singlepoast or mypoast.id})}">
-    <input type="hidden" name="id" value="${post.id}">
-    <tr>
-        <td>
-        </td>
-        <input type="text">
-        <td></td>
-        <input type="text">
+<form th:action="@{'/posts/' + ${posts.id} + '/delete'}" th:method="POST">
 
-    </tr>
+    <button>Delete</button>
+
 </form>
-    </div>
+
+<!--    <div th:each="post : ${posts}">-->
+<!--<form th:action="@{'/posts/edit' + ${posts.id}}" method="post">-->
+<!--    form action:-->
+<!--th:action="@{/posts/{id}(id=${singlepoast or mypoast.id})}">-->
+<!--    <input type="hidden" name="id" value="${post.id}">-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--        </td>-->
+<!--        <input type="text">-->
+<!--        <td></td>-->
+<!--        <input type="text">-->
+
+<!--    </tr>-->
+<!--</form>-->
+<!--    </div>-->
 
 
-    <form th:action="@{'/posts/' + ${posts.id} + '/delete'}" method="post">
-        <h1>delete</h1>
-        <button type="submit">Submit</button>
-    </form>
+<!--    <form th:action="@{'/posts/' + ${posts.id} + '/delete'}" method="post">-->
+<!--        <h1>delete</h1>-->
+<!--        <button type="submit">Submit</button>-->
+<!--    </form>-->
+
+<!--&lt;!&ndash;new w form model binding; demo of dynamic url&ndash;&gt;-->
+
+<!--<form th:action="@{/posts/{id}/edit(id=${posts.id})}" th:method="POST" th:object="${post}">-->
+<!--    <div class="form-group">-->
+<!--        <label for="title">Title</label>-->
+<!--        <input type="text" class="form-control" id="title" th:field="*{title}" th:value="*{title}">-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label for="body">Body</label>-->
+<!--        <input type="text" class="form-control" id="body" th:field="*{body}" th:value="*{body}">-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--&lt;!&ndash;    <a class="btn btn-primary" th:href="@{/posts/{id}/edit(id=${posts.id})}" role="button">Edit</a>&ndash;&gt;-->
+<!--</form>-->
 
 </body>
 </html>

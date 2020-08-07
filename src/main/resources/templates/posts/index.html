@@ -20,7 +20,7 @@
         <h1 th:text="${post.title}"></h1></a>
 
         <p th:text="${post.body}"></p>
-<!--    <button th:href="/posts/${post}/edit">Update</button>-->
+    <button th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</button>
     </div>
 </body>
 </html>

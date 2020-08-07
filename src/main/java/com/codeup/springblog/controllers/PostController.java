@@ -50,11 +50,13 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
+    //need somewhere to get info
     public String show(@PathVariable long id, Model model) {
 //        Post myPost = new Post(id, "blog1", "Hey there");
 //        model.addAttribute("post", postDao.getOne(id));
         Post singlePost = postDao.getOne(id);
         User singleUser = userDao.getOne(id);
+        //do not need the parameter attribs now, the object has been defined
 //        model.addAttribute("title", singlePost.getTitle());
 //        model.addAttribute("body", singlePost.getBody());
         //refactor to: (because all attribs will go, don't have to write a line for every attrib bigger real world
@@ -68,6 +70,10 @@ public class PostController {
     // edit ================
     @PostMapping("/posts/{id}/edit")
     public String update(@PathVariable long id, @ModelAttribute Post posts){
+        //hardcoded user for pre spring security purposes so that the post has a placeholder user_id
+        User user = userDao.getOne(1L);
+        //todo good place for a do list item; no authentication yet, later make user dynamic when spring security is incorped
+        posts.setUser(user);
 //        Post postToUpdate = new Post(); //old way
         //get post from db to edit
 //        Post postToUpdate = postDao.getOne(id);
@@ -80,7 +86,8 @@ public class PostController {
         postDao.save(posts);
         //redirect to that id's page
 
-        return "redirect:/posts/" + id;
+//        return "redirect:/posts/" + id;
+        return "redirect:/posts";
         // or mine:
         //return "redirect:posts/show";
 //       return "posts/show";
