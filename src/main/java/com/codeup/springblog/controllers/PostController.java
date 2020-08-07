@@ -54,10 +54,12 @@ public class PostController {
 //        Post myPost = new Post(id, "blog1", "Hey there");
 //        model.addAttribute("post", postDao.getOne(id));
         Post singlePost = postDao.getOne(id);
+        User singleUser = userDao.getOne(id);
 //        model.addAttribute("title", singlePost.getTitle());
 //        model.addAttribute("body", singlePost.getBody());
         //refactor to: (because all attribs will go, don't have to write a line for every attrib bigger real world
         model.addAttribute("post", singlePost);
+        model.addAttribute("user", singleUser);
         //return postDao.getOne(id).toString();
 //        return "redirect:/posts/" + id;
         return "posts/show";

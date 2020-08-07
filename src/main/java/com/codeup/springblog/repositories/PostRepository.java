@@ -11,6 +11,12 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     //use dependency inj to forward on
     //refactor the controller
-    @Query(nativeQuery = true, value = "SELECT title from ads where length(title) < 10")
+//    @Query(nativeQuery = true, value = "SELECT title from ads where length(title) < 10")
+//    List<Post> findAllByOrderByIdDesc();
+
+    @Query(nativeQuery = true, value = "select title from posts where length(title) < 10")
     List<Post> findAllByOrderByIdDesc();
+
+    //for search feat later:
+    Post findByTitle(String title);
 }
