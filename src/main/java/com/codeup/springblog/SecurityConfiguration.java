@@ -36,9 +36,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 /* Login configuration */
+                /*Todone change from ads to posts*/
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/ads") // user's home page, it can be any URL
+                .defaultSuccessUrl("/posts/view") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
                 .and()
@@ -47,14 +48,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/ads") // anyone can see the home and the ads pages
+                .antMatchers("/", "/posts/view", "/login", "/sign-up", "/posts/index") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/ads/create", // only authenticated users can create ads
-                        "/ads/{id}/edit" // only authenticated users can edit ads
+                        "/posts/create", // only authenticated users can create ads,only authenticated users can edit ads
+                        "/posts/{id}/edit",
+                        "/posts",
+                        "/posts/",
+                        "/posts/{id}",
+                        "/posts/{id}/delete",
+                        "/login",
+                        "/ads/view"
                 )
                 .authenticated()
         ;

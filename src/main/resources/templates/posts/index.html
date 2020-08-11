@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
+<!--add the head-->
 <head>
     <meta charset="UTF-8">
     <title>View All Posts</title>
@@ -9,6 +10,13 @@
 </head>
 <!--<nav th:include="navbar"></nav>-->
 <body>
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+    Email: <span th:text="${#authentication.principal.email}"/>
+</div>
 <a href="/posts/create"><h2>Create</h2></a>
 <h1>Post Index</h1>
 <!--<ul>-->

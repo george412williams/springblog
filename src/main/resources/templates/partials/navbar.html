@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,14 +10,25 @@
     <h2><a href="/">Home Page</a> <a href="/roll-dice">Dice Guess Game</a></h2>
     <h8>(partials/navbar :: navbar; Partials directory navbar; not navbar fragment in partials.html)</h8>
     <ul>
-        <li class="nav-item"><a href="th:"></a>Home</li>
-        <li class="nav-item"><a href="th:"></a>Posts</li>
-        <li class="nav-item"><a href="th:"></a>Roll Dice</li>
+        <li class="nav-item"><a th:href="@{/}"></a>Home</li>
+        <li class="nav-item"><a th:href="@{/posts}"></a>Posts</li>
+        <li class="nav-item"><a th:href="@{/roll-dice}"></a>Roll Dice</li>
+        <th:block sec:authorize="!isAuthenticated()">
+            <li>
+                <a th:href="@{/login}">Login</a>
+            </li>
+            <li>
+                <a th:href="@{/sign-up}">SignUp</a>
+            </li>
+
+        </th:block>
+        <th:block sec:authorize="!isAuthenticated()">
         <li>
             <form th:action="@{/logout}" th:method="post">
                 <button class="btn-link btn" style="margin-top: 8px">Logout</button>
             </form>
         </li>
+        </th:block>
     </ul>
 </nav>
 

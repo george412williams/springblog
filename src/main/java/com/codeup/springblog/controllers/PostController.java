@@ -4,6 +4,7 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,20 +39,33 @@ public class PostController {
 //        User user = userDao.getOne(id);
 //    }
 
+
     @GetMapping("/posts")
+    @ResponseBody
+    public List<Post> getPosts(){
+        return postDao.findAll();
+    }
+
+    @GetMapping("/posts/view")
     public String index(Model model) {
-        List<Post> myPosts = postDao.findAll();
-            //making a list for validation on posting side, may not matter
-        model.addAttribute("posts", myPosts);
-            //need to be flexable for the storage
+        //user grab for sec
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        System.out.println(loggedInUser);
+        System.out.println(loggedInUser.getUsername());
+        //have access to user and their properties here
+            //used when you know that a user has to be authenticated to use,
+            // pull user, getUsername or whatever and send to model as usual
+        model.addAttribute("posts", postDao.findAllByOrderByIdDesc());
         return "posts/index";
+    }
+        //List<Post> myPosts = postDao.findAll();
+            //making a list for validation on posting side, may not matter
         //simulated table items for testing prior to learning dependency injection
         //the repository leads to the injection which gives you postDao which then gives you all posts
 //        ArrayList<Post> myPosts = new ArrayList<>();
 //        myPosts.add(new Post(2, "Blog2","Blog2 Text"));
 //        myPosts.add(new Post(3, "Blog3","Blog2 Text"));
 //        myPosts.add(new Post(4, "Blog4","Blog4 Text"));
-    }
 
     @GetMapping("/posts/{id}")
     //need somewhere to get info

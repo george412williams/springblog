@@ -14,6 +14,7 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+            //grandtedauth is collection of authorities a user can have
         String roles = ""; // Since we're not using the authorization part of the component
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
