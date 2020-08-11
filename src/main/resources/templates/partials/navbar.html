@@ -9,6 +9,17 @@
 <nav th:fragment="navbar">
     <h2><a href="/">Home Page</a> <a href="/roll-dice">Dice Guess Game</a></h2>
     <h8>(partials/navbar :: navbar; Partials directory navbar; not navbar fragment in partials.html)</h8>
+    <ul>
+        <li class="nav-item"><a href="th:"></a>Home</li>
+        <li class="nav-item"><a href="th:"></a>Posts</li>
+        <li class="nav-item"><a href="th:"></a>Roll Dice</li>
+        <li>
+            <form th:action="@{/logout}" th:method="post">
+                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+            </form>
+        </li>
+    </ul>
 </nav>
+
 </body>
 </html>
