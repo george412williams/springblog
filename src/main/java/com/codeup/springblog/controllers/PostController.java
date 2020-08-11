@@ -49,7 +49,11 @@ public class PostController {
     @GetMapping("/posts/view")
     public String index(Model model) {
         //user grab for sec
+
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        User user = userDao.getOne(1L);
+        Post post = postDao.getOne(1L);
+        //post.setParentUser(user);
         System.out.println(loggedInUser);
         System.out.println(loggedInUser.getUsername());
         //have access to user and their properties here
